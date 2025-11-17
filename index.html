@@ -16,10 +16,24 @@
 <link rel="alternate" hreflang="es"    href="https://www.aca.org.ar/promociones/asociacion/0724/">
 <link rel="alternate" hreflang="x-default" href="https://www.aca.org.ar/promociones/asociacion/0724/">
 
-  <!-- Favicons (si no los tenés ya) -->
-<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+ <!-- Favicon básico -->
+<link rel="icon" href="/favicon-aca-moto.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-aca-moto-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-aca-moto-16x16.png">
+
+<!-- iOS / iPadOS -->
+<link rel="apple-touch-icon" href="/favicon-aca-moto-apple-180.png">
+
+<!-- PWA / Android -->
+<link rel="manifest" href="/favicon-aca-moto.webmanifest">
+
+<!-- Safari macOS (pinned tab) -->
+<link rel="mask-icon" href="/favicon-aca-moto-pinned.svg" color="#000000">
+
+<!-- Colores de UI -->
+<meta name="theme-color" content="#000000">
+<meta name="msapplication-TileColor" content="#000000">
+
 
 <!-- Mejor experiencia en dispositivos -->
 <meta name="theme-color" content="#000000">
@@ -107,7 +121,22 @@
     "https://twitter.com/ACA_Oficial"
   ]
 }
+
+  {
+  "name": "ACA Socio Moto",
+  "short_name": "ACA Moto",
+  "icons": [
+    { "src": "/favicon-aca-moto-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-aca-moto-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone"
+}
+
 </script>
+
+  
 
 </head>
 
@@ -323,4 +352,5 @@
   </div>
 </body>
 </html>
+
 
