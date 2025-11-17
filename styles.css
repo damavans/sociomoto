@@ -1,75 +1,288 @@
-/* Base */
+/* ====== Base ====== */
 *{box-sizing:border-box}
 html,body{margin:0}
-body{font:16px/1.5 Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;color:#111;background:#f6f7f8}
+html,body{overflow-x:hidden}
 img{display:block;max-width:100%;height:auto}
 a{text-decoration:none}
-.container{max-width:1180px;margin-inline:auto;padding:0 20px}
+:root{
+  --font-heading:"Zing Rust Demo","Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  --aca-yellow:#FEC526;
+  --aca-cream:#F6EDCD;
+  --aca-accent:#ff5a3c;
+  --bg:#000;
+  --text:#fff;
+}
+
+/* Webfont Zing Rust (titulares) */
+@font-face{
+  font-family:"Zing Rust Demo";
+  src:url("fonts/ZingRustDemo-Base.woff2") format("woff2"),
+      url("fonts/ZingRustDemo-Base.woff") format("woff");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+  font-synthesis:none;
+}
+
+/* Rebel Regular (script en estilo normal) */
+@font-face{
+  font-family: "Rebel";
+  src: url("fonts/Rebel.woff2") format("woff2"),
+       url("fonts/Rebel-Regular.woff")  format("woff");
+  font-weight: 400;
+  font-style: normal;   /* importante: NO italic */
+  font-display: swap;
+}
+
+/* Utilidades & container */
+.container{max-width:1920px;margin-inline:auto}
 .skip{position:absolute;left:-9999px;top:auto}
 .skip:focus{left:12px;top:12px;background:#000;color:#fff;padding:8px 12px;border-radius:8px}
 
-/* Botones */
-.btn{display:inline-block;padding:.9rem 1.2rem;border-radius:999px;font-weight:800}
-.btn--primary{background:#ffd34d;color:#0b0b0c;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-.btn--primary:hover{filter:brightness(.95)}
+/* ====== Body ====== */
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6}
 
-/* ===== HERO Motoquero ===== */
-.hero--moto{
+/* ====== Botones ====== */
+.btn{
+  padding:1rem 2rem;border:1px solid var(--aca-yellow);border-radius:50px;
+  font-size:1rem;font-weight:600;cursor:pointer;display:inline-block;transition:.25s;
+}
+.btn-primary{background:var(--aca-yellow);color:#000;box-shadow:0 4px 15px rgba(254,197,38,.4)}
+.btn-primary:hover{background:#FFF2CD;transform:translateY(-2px)}
+.btn-secondary{background:#FFF2CD;color:#000;box-shadow:0 6px 20px rgba(254,197,38,.6)}
+.btn-secondary:hover{background:var(--aca-yellow)}
+
+html { scroll-behavior: smooth; }
+
+
+
+
+/* ====== HERO ====== */
+
+.hero{
   position:relative;
-  display:grid;
-  grid-template-columns: 48% 52%;
-  min-height: clamp(520px, 72vh, 760px);
+  display:flex;
+  align-items:center;
+  min-height:100vh;
   overflow:hidden;
-  background:#0b0b0c;color:#fff;
+  padding-left: 92px;
 }
 
-/* Panel negro inclinado (izquierda) */
-.hero__left{position:relative;background:#0b0b0c;z-index:2}
-.hero__left::after{
-  content:"";position:absolute;top:0;right:-8vw;bottom:0;width:20vw;
-  background:#0b0b0c;transform:skewX(-14deg);transform-origin:left center;
-  box-shadow: 40px 0 60px rgba(0,0,0,.35);
-}
-.hero__inner{position:relative;padding:clamp(28px,4vw,56px);max-width:680px}
-
-.hero__title{
-  margin:12px 0 14px;font-weight:900;letter-spacing:.8px;line-height:1.02;
-  font-size:clamp(34px,5.4vw,64px);text-transform:uppercase;
-}
-.hero__title .accent{color:#ff5a3c;font-style:italic;text-transform:none}
-.hero__lead{margin:10px 0 18px;color:#e6e6e6;max-width:46ch;font-size:clamp(14px,1.5vw,16px)}
-
-/* Sello “Socio Moto” */
-.hero__stamp{margin-bottom:10px}
-.stamp__top{display:block;font-weight:900;letter-spacing:2px;font-size:12px;opacity:.9}
-.stamp__main{display:block;font-weight:900;letter-spacing:3px;font-size:40px;line-height:.95}
-.stamp__script{display:block;font-size:32px;color:#ff5a3c;font-style:italic;font-weight:900;transform:translateY(-4px) rotate(-6deg)}
-
-/* Columna derecha (imagen) */
-.hero__right{position:relative;isolation:isolate}
-.hero__right picture, .hero__right img{position:absolute;inset:0;width:100%;height:100%}
-.hero__right img{object-fit:cover;object-position:62% 50%;
-  filter:contrast(1.02) saturate(1.02) brightness(.95);
+/* Columna izquierda: panel negro que queda por encima */
+.hero-left{
+  position:relative; z-index:2;
+  flex:0 0 45%; max-width:45%;
+  margin-right: -100px;
+  /* si querés borde diagonal, opcional:
+  clip-path: polygon(0 0,100% 0,87% 100%,0 100%); */
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 980px){
-  .hero--moto{
-    grid-template-columns: 1fr;
-    min-height:auto;
-  }
-  .hero__left::after{display:none}
-
-  /* En mobile, la imagen va arriba y el panel debajo (como tu captura) */
-  .hero__right{order:-1;height:44vh;min-height:320px;background:#000}
-  .hero__inner{padding:24px 18px 28px}
-  .hero__title{font-size:clamp(28px,8vw,38px)}
-  .stamp__main{font-size:28px}
-  .stamp__script{font-size:24px}
+/* Columna derecha: imagen debajo del panel */
+.hero-right{
+  position:relative; z-index:1;
+  flex:1 1 55%;
+  min-height:100vh; /* asegura alto para que la foto llene */
 }
 
-/* Demo de sección/CTA para que veas la continuidad (opcional) */
-.trip-steps{padding:56px 0;background:#fff}
-.cta{padding:72px 0;background:linear-gradient(135deg,#f7f7f7,#eef2ff);text-align:center}
-.footer{background:#0f0f10;color:#bfc3c9;padding:28px 0}
-.footer .container{text-align:center}
+.hero-right picture,
+.hero-right img{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.hero-right img{
+  object-fit:cover;
+  object-position:right center; /* encuadre desktop */
+}
+
+
+.hero-logo{position:absolute;top:40px;left:50%;transform:translateX(-50%);z-index:3}
+.hero-logo .logo-img{height:150px;width:auto}
+
+.hero-title{font-family:var(--font-heading);font-weight:400;letter-spacing:-0.02em;line-height:0.9;color:var(--aca-cream);font-size: 91px;margin:0}
+.hero-title .accent-aca{font-family: "Rebel", var(--font-heading), system-ui, sans-serif;
+  font-style: normal;        /* forzado a normal */
+  letter-spacing: 0;         /* script se ve mejor sin tracking extra */
+  /* ajustes finos opcionales: */
+  font-size: 1.04em;         /* levanta un toque el “peso visual” */
+  line-height: 0.56;         /* reduce altura visual si queda muy alta */
+  margin-top: -10px;
+}
+.hero-description{font-size: 0.96rem; font-weight: 300; max-width:520px,}
+/* 2) la foto ocupa TODO el hero por detrás */
+.hero-image{
+  position: absolute;   /* saca a la imagen del grid */
+  inset: 0;             /* top/right/bottom/left = 0 → llena el hero */
+  z-index: 1;           /* por debajo del contenido */
+  overflow: visible;
+}
+.hero-image img{
+  width: 100vw;         /* que pueda “salirse” del contenedor si hace falta */
+  max-width: none;
+  height: 100%;
+  object-fit: cover;    /* sin bandas, recorte elegante */
+  object-position: right center;  /* foco a la derecha */
+}.hero-image picture,.hero-image img{width:100%;height:100%}
+
+/* ====== Beneficios ====== */
+.benefits-section{background:#000;color:#fff;padding:84px 64px}
+.benefits-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:start}
+.eyebrow-left,.eyebrow{color:var(--aca-yellow);text-transform:uppercase;letter-spacing:.14em;font-weight:400;font-size:.8rem;margin:0 0 15px}
+.heading{font-family:var(--font-heading);font-weight:400;letter-spacing:-.02em;line-height:0.9;color:var(--aca-cream);margin:6px 0 14px;font-size:80px}
+.heading--center{text-align:center}
+.heading .accent-aca {
+    letter-spacing: -5px;
+    font-size: 65px;
+}
+.accent-aca{font-family: "Rebel", var(--font-heading), system-ui, sans-serif;
+  font-style: normal;        /* forzado a normal */
+  color: #E85A3E;
+  letter-spacing: 0;         /* script se ve mejor sin tracking extra */
+  /* ajustes finos opcionales: */
+  font-size: 1.04em;         /* levanta un toque el “peso visual” */
+  line-height: 0.76;         /* reduce altura visual si queda muy alta */}
+
+/* Tarjeta precio */
+.price-card{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--aca-yellow);color:#111;border-radius:16px;padding:18px;
+  max-width:480px;box-shadow:0 18px 40px rgba(254,197,38,.35);border:1px solid rgba(0,0,0,.08);
+  margin-top:150px;position:relative;
+}
+.price-line{display:flex;align-items:center;gap:8px;margin:4px 0 12px}
+.price-amount{font-weight:900;font-size:clamp(26px,3.2vw,32px)}
+.price-period{font-weight:700;opacity:.85}
+.title-price{font-weight:800;font-size:30px;font-family:var(--font-body); margin-top: 0px; margin-bottom: 0px;}
+.tiny-note{font-size:.78rem;color:#2d2d2d;margin:8px 0 0}
+.badge{display:inline-flex;flex-direction:column;align-items:center;margin-top:-130px;margin-bottom:30px}
+.badge .etiqueta{margin-top:-10px}
+
+/* Lista de beneficios */
+.benefits-list{list-style: none;
+  display: grid;
+  gap: 12px;}
+.benefits-list li{
+  display: grid;
+  grid-template-columns: 72px 1fr;   /* columna icono + texto */
+  column-gap: 14px;
+  align-items: center;               /* centra el bloque de texto vs icono */
+}
+.benefits-list h4{font-weight:800;margin:0 0 2px;color:#fff}
+.benefits-list p{margin:0;color:#cfd3d9;font-size:.95rem}
+.icon-li{width: 64px;
+  height: 64px;
+  min-width: 64px;                   /* evita que en mobile se achique y se corte */
+  min-height: 64px;
+  display: block;
+  box-sizing: content-box;           /* el padding no “come” área del gráfico */
+  padding: 8px;                      /* espacio interno respirando */
+  background: rgba(255,255,255,.06);
+  border-radius: 12px;
+  object-fit: contain;               /* nunca se deforma ni se corta */
+  object-position: center;           /* centrado perfecto */
+margin-top: 15px;}
+
+  .icon-li img {margin-top: 15px;}
+
+  .leyenda {text-align: center; margin-top: 40px;}
+  .texto-leyenda {color: #fff;}
+  .negrita {font-weight: 700; text-decoration: underline;}
+
+/* ====== Stripe RN40 ====== */
+.stripe-rn40{position:relative;width:100%;overflow:hidden;background:#000}
+.stripe-rn40 img{width:100%;height:clamp(120px,60vh,400px);object-fit:cover;object-position:center}
+.stripe-rn40::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,.04));pointer-events:none}
+
+/* ====== Caravana ====== */
+.caravana-section{padding:64px;border-top:1px solid rgba(255,255,255,.06)}
+.container-caravana{display:flex;flex-direction:column;align-items:center;gap:30px}
+.heading-caravana {text-align: center;}
+.caravana-cards{display:grid;grid-template-columns:repeat(3,minmax(240px,1fr));gap:22px;margin-top:22px}
+.caravana-card{display:flex;flex-direction:column;align-items:center;padding:14px}
+.caravana-media{aspect-ratio:4/3;border-radius:10px;overflow:hidden;margin:0 0 -15px}
+.caravana-media img{width:100%;height:100%;object-fit:contain}
+.caravana-title{font-weight:600;font-size:1.1rem;color:#fff;margin:6px 0 6px;text-align:center}
+.caravana-text{color:#d6d8de;font-size:.96rem;margin:0;text-align:center}
+.caravana-promo{text-align:center;margin:18px 0 12px;color: #E85A3E;font-weight:600}
+.caravana-cta{text-align:center}
+
+/* ====== Footer ====== */
+.footer{background:#000;padding:60px 64px 40px}
+.footer-container{max-width:1920px;margin:0 auto}
+/* contenedor centrado */
+.footer-logo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:40px;   /* el que ya tenías */
+}
+
+/* imagen responsive y centrada */
+.footer-logo-img{
+  display:block;        /* evita espacios inline */
+  margin:0 auto;        /* por si cambia a text-align */
+  width: clamp(160px, 20vw, 200px);
+  height:auto;
+}
+.footer-divider{height:.5px;background:#7a7a7a;margin-bottom:30px}
+.footer-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-right{display: flex; flex-direction: row; gap: 20px;}
+.footer-link{color:#fff; font-size: 0.96rem; text-decoration: underline;}
+.footer-link:hover{color:#E85A3E;text-decoration:underline}
+.footer-copyright{color:#fff;font-size:14px}
+
+/* ====== Popup Privacidad (mínimo necesario) ====== */
+.privacy-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
+.privacy-popup-overlay.active{display:flex}
+.privacy-popup-container{background:#fff;border-radius:12px;max-width:800px;width:100%;max-height:90vh;display:flex;flex-direction:column}
+.privacy-popup-header{display:flex;justify-content:space-between;align-items:center;padding:24px;border-bottom:1px solid #eee}
+.privacy-popup-title{font-size:24px;font-weight:700;color:#000;margin:0}
+.privacy-popup-close{background:none;border:none;font-size:28px;cursor:pointer}
+.privacy-popup-content{padding:24px;overflow:auto}
+.privacy-popup-content p{color:#333;margin:0 0 14px}
+
+/* ====== Responsive ====== */
+@media (max-width:1024px){
+  .benefits-grid{grid-template-columns:1fr}
+  .price-card{max-width:520px;margin-inline:auto}
+}
+@media (max-width:980px){
+
+.hero{ flex-direction:column; padding: 0px;}
+  .hero-left{ max-width:100%; margin: 0px; padding-left: 20px; margin-top: 250px; /* clip-path:none; */ }
+  .hero-right{ width:100%; min-height:44vh; }
+  .hero-right img{ object-position:center; } /* encuadre mobile */
+
+  /* Hero: en mobile la imagen va DEBAJO del contenido */
+  .hero-section{grid-template-columns:1fr;min-height:auto}
+  .hero-image{order:2;height:44vh;min-height:320px}
+  .hero-image img{object-fit:cover;object-position:center}
+  .hero-content{order:1;gap:16px}
+  .hero-logo{top:20px}
+  .heading{font-size: 60px;}
+  .hero-title{font-size: 60px;}
+}
+@media (max-width:560px){
+  .benefits-section{padding:60px 20px}
+  .benefits-list{padding: 0px;}
+  .benefits-list li{grid-template-columns: 56px 1fr; /* un poco más compacto */
+    align-items: center;             /* verticalmente centrado */}
+   .icon-li{
+    width: 64px;
+    height: 64px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+  }  
+  .caravana-section{padding:60px 20px}
+  .container-caravana {gap: 0px;}
+  .heading-caravana {text-align: center;}
+  .caravana-cards{grid-template-columns:1fr}
+  .caravana-media{margin: 0 0 -15px;}
+  .footer{padding:40px 20px 30px}
+  .footer-content{flex-direction:column;text-align:center;gap:15px}
+}
+
+
