@@ -276,6 +276,12 @@ margin-top: 15px;}
     min-height: 40px;
     padding: 8px;
   }  
+
+  .heading .accent-aca {
+    letter-spacing: -5px;
+    font-size: 56px;
+  margin-top: -10px;
+}
   .caravana-section{padding:60px 20px}
   .container-caravana {gap: 0px;}
   .heading-caravana {text-align: center;}
@@ -284,6 +290,7 @@ margin-top: 15px;}
   .footer{padding:40px 20px 30px}
   .footer-content{flex-direction:column;text-align:center;gap:15px}
 }
+
 
 
 
