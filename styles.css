@@ -135,6 +135,7 @@ html { scroll-behavior: smooth; }
 .heading .accent-aca {
     letter-spacing: -5px;
     font-size: 65px;
+  margin-top: -10px;
 }
 .accent-aca{font-family: "Rebel", var(--font-heading), system-ui, sans-serif;
   font-style: normal;        /* forzado a normal */
@@ -283,6 +284,7 @@ margin-top: 15px;}
   .footer{padding:40px 20px 30px}
   .footer-content{flex-direction:column;text-align:center;gap:15px}
 }
+
 
 
 
